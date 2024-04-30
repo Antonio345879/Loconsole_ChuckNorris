@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chuck Norris</title>
+</head>
+<body>
+    <h1>Battute Chuck Norris</h1>
+    
+    <button class="randomButton">Ottieni una battuta casuale</button>
+   
+    <div id="result"></div>
+    <div class="creationDate"></div>
+    <select class="categorySelect">
+    <option value="">Seleziona la categoria</option>
+    <option value="animal">Animal</option>
+    <option value="career">Career</option>
+    <option value="celebrity">Celebrity</option>
+    <option value="food">Food</option>
+    <option value="sport">Sport</option>
+    <option value="travel">Travle</option>
+    <option value="music">Music</option>
+    <option value="dev">Dev</option>
+    <option value="explicit">Explicit</option>
+    <option value="fashion">Fashion</option>
+    <option value="history">History</option>
+    <option value="money">Money</option>
+    <option value="movie">Movie</option>
+    <option value="political">Political</option>
+    <option value="religion">Religion</option>
+    <option value="science">Science</option>
+
+</select>
+
+    <script>
+            let btn = document.querySelector(".randomButton")
+
+            let categoria = document.querySelector("categorySelect").value
+
+        
+
+            btn.addEventListener("click", async function(event){
+            event.preventDefault()
+            let selectedCategory = selectCat.value
+            let apiUrl = "https://api.chucknorris.io/jokes/random"  
+            if(selectedCategory != "random"){
+                apiUrl = "https://api.chucknorris.io/jokes/random" + "?category=" + selectedCategory 
+            }
+            let resp = await fetch(apiUrl)
+            let data = await resp.json();
+            document.querySelector("#result").innerHTML = data.value
+
+        })
+    </script>
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: 'Roboto', sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .randomButton {
+            display: block;
+            margin: 0 auto;
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #ff6f00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .randomButton:hover {
+            background-color: #ff9000;
+        }
+
+        #result {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .categorySelect {
+            display: block;
+            margin: 0 auto;
+            padding: 12px 24px;
+            margin-top: 30px;
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+            background-color: #ff6f00;
+            color: #fff;
+        }
+
+        .categorySelect option {
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .creationDate {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 10px;
+        }
+    </style>
+</body>
+</html>
